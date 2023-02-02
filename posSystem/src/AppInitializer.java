@@ -7,33 +7,36 @@ public class AppInitializer {
     //    database area
     public static void main(String[] args) {
 
+        boolean exitState = false;
         String[] initialMessage = {
                 "1. Sign Up",
                 "2. Sign In",
                 "3. Exit"
         };
+        while(!exitState){
+            for(String msg : initialMessage)
+                System.out.println(msg);
 
-        for(String msg : initialMessage)
-            System.out.println(msg);
+            Scanner sc = new Scanner(System.in);
+            int initialInput = sc.nextInt();
 
-        Scanner sc = new Scanner(System.in);
-        int initialInput = sc.nextInt();
+            switch (initialInput){
+                case 1:
+                    if(SignUp()) openDashboard();
+                    break;
 
-        switch (initialInput){
-            case 1:
-                if(SignUp()) openDashboard();
-                break;
+                case 2:
+                    if(SignIn()) openDashboard();
+                    break;
 
-            case 2:
-                if(SignIn()) openDashboard();
-                break;
+                case 3:
+                    System.out.println("Exit is selected");
+                    exitState = true;
+                    break;
 
-            case 3:
-                System.out.println("Exit is selected");
-                break;
-
-            default:
-                System.out.println("Invalid input is given");
+                default:
+                    System.out.println("Invalid input is given");
+            }
         }
     }
 
