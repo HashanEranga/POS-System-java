@@ -21,11 +21,11 @@ public class AppInitializer {
 
         switch (initialInput){
             case 1:
-                SignUp();
+                if(SignUp()) openDashboard();
                 break;
 
             case 2:
-                SignIn();
+                if(SignIn()) openDashboard();
                 break;
 
             case 3:
@@ -37,11 +37,11 @@ public class AppInitializer {
         }
     }
 
-    public static void SignUp(){
+    public static boolean SignUp(){
         // check last element is null in users
         if(users[2][0] != null){
             System.out.println("Users limit exceeded");
-            return;
+            return false;
         }
 
         // get details
@@ -56,7 +56,7 @@ public class AppInitializer {
         for(String[] user : users){
             if(user[0] != null && user[0].equalsIgnoreCase(email) ){
                 System.out.println("User Already Exist");
-                return;
+                return false;
             }
             else{
                 user[0] = email;
@@ -66,8 +66,9 @@ public class AppInitializer {
             }
         }
 
+        return true;
     }
-    public static void SignIn(){
+    public static boolean SignIn(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your email : ");
         String email = sc.next();
@@ -78,10 +79,14 @@ public class AppInitializer {
         for(String[] user : users){
             if(user[0] != null && user[0].equalsIgnoreCase(email) && user[1].equals(password)) {
                 System.out.println("User Authorized");
-                return;
+                return true;
             }
         }
         System.out.println("No user found");
+        return false;
     }
 
+    public static void openDashboard(){
+        System.out.println("Welcome to dashboard!");
+    }
 }
